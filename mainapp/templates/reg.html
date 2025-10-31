@@ -1,0 +1,68 @@
+{%extends 'parent.html'%}
+{%block body%}
+
+<div class="row mt-2" style="background-image: linear-gradient(to right,rgb(4, 89, 209),rgb(18,121,5));">
+    <div class="col-md-8 mx-auto p-5" >
+        <form action="" enctype="multipart/form-data" method="POST" class="w-75 mx-auto p-5 bg-light shadow-lg rounded-5 " style="border: 2px solid rgb(155, 155, 255); ">
+            {%csrf_token%}
+            <h5 class=" fw-bold fs-4"><span style="color: rgb(4, 89, 209);">Student </span>Registration</h5>
+            <br>
+            <label for="" class=" fw-semibold ">Enter your Name: </label>
+            <input type="text" name="name" placeholder="Enter your name" class="form-control rounded-pill ">
+            <br>
+            <label for="" class=" fw-semibold">Enter your F'Name: </label>
+            <input type="text" name="fname" placeholder="Enter your f'name" class="form-control rounded-pill">
+            <br>
+            <label for="" class="fw-semibold">Enter your M'Name: </label>
+            <input type="text" name="mname" placeholder="Enter your m'name" class="form-control rounded-pill">
+            <br>
+            <label for="" class=" fw-semibold">Enter your Number: </label>
+            <input type="number" name="number" placeholder="Enter your mobile no." class="form-control rounded-pill">
+            <br>
+            <label for="" class="fw-semibold">Enter your Email: </label>
+            <input type="email" name="email" placeholder="Eg:- abc@gamil.com" class="form-control rounded-pill ">
+            <br>
+            <label for="" class="fw-semibold">Enter your Password: </label>
+            <input type="password" name="password" placeholder="Create your password.." class="form-control rounded-pill ">
+            <br>
+            <label for="" class="fw-semibold">Select your Gender: </label><br>
+            <input type="radio" name="gen" value="male" id="" class="form-radio">&nbsp;&nbsp;<span>Male</span><br>
+            <input type="radio" name="gen" value="female" id="" class="form-radio">&nbsp;&nbsp;<span>Female</span>
+            <br>
+            <br>
+            <label for="" class="fw-semibold">Select Your Branch: </label>
+            <select name="branch" id="" class="form-control rounded-pill">
+                <option value="">--Select Branch--</option>
+                {%for b in branch%}
+                <option value="{{b.branch}}">{{b.branch}}</option>
+                {%endfor%}
+            </select>
+            <br>
+            <label for="" class="fw-semibold">Select Your Course: </label>
+            <select name="course" id="" class="form-control rounded-pill">
+                <option value="">--Select Course--</option>
+                {%for c in course%}
+                <option value="{{c.course}}">{{c.course}}</option>
+                {%endfor%}
+            </select>
+            <br>
+            <label for="" class=" fw-semibold">Select Your Session: </label>
+            <select name="session" id="" class="form-control rounded-pill">
+                <option value="">--Select Session--</option>
+                {%for s in session%}
+                <option value="{{s.session}}">{{s.session}}</option>
+                {%endfor%}
+            </select>
+            <br>
+            <label for="" class=" fw-semibold">Enter Your Address: </label>
+            <textarea name="address" placeholder="Address" class="form-control rounded-pill" id=""></textarea>
+            <br>
+            <label for="" class="fw-semibold">Upload Pic :</label>
+            <input type="file" name="pic" id="" class="rounded-pill form-control">
+            <br>
+            <input type="submit" value="Register" class="btn btn-success fw-bold">
+        </form>
+    </div>
+</div>
+
+{%endblock%}

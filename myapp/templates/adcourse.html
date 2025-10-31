@@ -1,0 +1,47 @@
+{%extends 'index.html'%}
+{%block body%}
+
+<div class="row">
+        <div class="mt-2 col-md-8 mx-auto p-1 ">
+            <form action="" method="post" class="w-75 mx-auto shadow-lg rounded-4 p-5" style="box-shadow: 0 0 10px rgba(13, 202, 240, 0.8) !important; ">
+                {%csrf_token%}
+                <h1 class="text-info fw-bold text-center">Add Course</h1>
+                <br>
+                <label for="" class="text-light fw-bold pb-2">Enter Course name :</label>
+                <input type="text" name="course" value="{{c.course}}" class="form-control rounded-pill ps-3 st">
+                <br>
+                
+                <input type="submit" value="Add Course" name="" class="btn btn-outline-info fw-bold rounded-pill form-control">
+            </form>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-8 p-5 mx-auto bg-light rounded-3 table-responsive shadow-lg">
+            <h4 class="text-dark mb-4 fw-bold"><i class=" text-info me-2 ffa-solid fa-book-open fa-bounce "></i>View Course</h4>
+            <table class="table table-hover align-middle text-center shadow-sm rounded-3 overflow-hidden">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">
+                        S no.
+                    </th>
+                    <th scope="col">Course Name</th>
+                   
+                    <th colspan="2" scope="col">Action</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {%for c in course%}
+                <tr>
+                    <td class="fw-semibold">{{forloop.counter}}</td>
+                    <td class="fw-bold">{{c.course}}</td>
+                    
+                    <td><a href="{% url 'myapp:editcourse' c.id %}" class="btn btn-outline-warning btn-sm shadow-sm"><i class="fa fa-edit"></i> Edit</a></td>
+                    <td><a href="{% url 'myapp:deletecourse' c.id %}" class="btn btn-outline-danger btn-sm shadow-sm"><i class="fa fa-trash"></i> Delete</a></td>
+                </tr>
+                {%endfor%}
+            </table>
+        </div>
+    </div>
+
+{%endblock%}
