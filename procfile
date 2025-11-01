@@ -1,1 +1,2 @@
-web: gunicorn projectname.wsgi
+web: gunicorn mypro.wsgi
+
