@@ -46,53 +46,63 @@ def logout(request):
     return redirect('mainapp:home')
 
 def registration(request):
-    if request.method=="POST":
+    if request.method == "POST":
         name = request.POST['name']
         fname = request.POST['fname']
         mname = request.POST['mname']
         number = request.POST['number']
         email = request.POST['email']
         password = request.POST['password']
-        gender= request.POST['gen']
-        course= request.POST['course']
+        gender = request.POST['gen']
+        course = request.POST['course']
         branch = request.POST['branch']
         session = request.POST['session']
         address = request.POST['address']
         pic = request.FILES['pic']
-        stu = Student()
-        stu.name=name
-        stu.fname=fname
-        stu.mname=mname
-        stu.number=number
-        stu.email=email
-        stu.gender=gender
-        stu.course=course
-        stu.branch=branch
-        stu.session=session
-        stu.address=address
-        stu.pic=pic
-        lo = Login.objects.create(email=email,password=password)
-        stu.save()
-        # Send Email After Successful Registration
-        context = {
-            'name': name,
-            'email': email,
-            'password': password,
-            'year': datetime.datetime.now().year
-        }
-        html_content = render_to_string('email.html', context)
-        subject = "Welcome to Biotech Park OLP"
-        from_email = settings.EMAIL_HOST_USER
-        to = [email]
 
-        msg = EmailMultiAlternatives(subject, '', from_email, to)
-        msg.attach_alternative(html_content, "text/html")
-        msg.send()
+        stu = Student(
+            name=name,
+            fname=fname,
+            mname=mname,
+            number=number,
+            email=email,
+            gender=gender,
+            course=course,
+            branch=branch,
+            session=session,
+            address=address,
+            pic=pic
+        )
+        stu.save()
+
+        Login.objects.create(email=email, password=password)
+
+        # ✅ Safe Email Sending (won't crash if email fails)
+        try:
+            context = {
+                'name': name,
+                'email': email,
+                'password': password,
+                'year': datetime.datetime.now().year
+            }
+            html_content = render_to_string('email.html', context)
+            subject = "Welcome to Biotech Park OLP"
+            from_email = settings.EMAIL_HOST_USER
+            to = [email]
+
+            msg = EmailMultiAlternatives(subject, '', from_email, to)
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
+        except Exception as e:
+            print("⚠️ Email not sent:", e)
+
         return redirect('mainapp:login')
-    course=Course.objects.all()
-    session=Session.objects.all()
-    branch=Branch.objects.all()
-    return render(request,'reg.html',locals())
+
+    course = Course.objects.all()
+    session = Session.objects.all()
+    branch = Branch.objects.all()
+    return render(request, 'reg.html', locals())
+
 
 def login(request):
     if request.method=="POST":
