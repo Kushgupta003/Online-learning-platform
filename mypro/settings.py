@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--7)20e_2zg0ab0+uzp)*)6r@ctau2_vp49x3411m!l5&2_iwc1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -129,13 +129,10 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-# ✅ Cloudinary Configuration
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dg55iswvr',        # ← yahan apna Cloudinary cloud name daalo
-    'API_KEY': '719131633414476',              # ← Cloudinary dashboard se
-    'API_SECRET': '35Y4nU527bujtIfnpbHE0q7s9vY',        # ← Cloudinary dashboard se
-}
+
+
 
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
