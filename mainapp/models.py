@@ -12,7 +12,7 @@ class Student(models.Model):
     branch= models.CharField(max_length=30)
     session= models.CharField(max_length=30)
     address= models.TextField(max_length=255)
-    pic = models.FileField(max_length=155,upload_to="student/")
+    pic = models.ImageField(upload_to="student/", blank=True, null=True)
     regdate = models.DateField(max_length=30,auto_now_add=True)
 
 class Login(models.Model):
