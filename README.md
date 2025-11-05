@@ -50,7 +50,7 @@ python manage.py createsuperuser
  python manage.py runserver
 
 7. Open in Browser
-http://127.0.0.1:8000/
+https://online-learning-platform-1cc0.onrender.com
 
 🤝 Contributing
 
